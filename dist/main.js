@@ -1,0 +1,1 @@
+(()=>{let e=(3,0,!1,{getLength:()=>3,getNumberHit:()=>0,getSunk:()=>false});console.log(e.getLength())})();
