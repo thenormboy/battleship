@@ -1,7 +1,5 @@
-import { Ship } from "./objects.js";
+import { Ship, Gameboard } from "./objects.js";
 
-let testCarrier = Ship(['00'], false)
+let game = Gameboard()
 
-testCarrier.hit('00')
-
-console.log(testCarrier.isSunk())
+console.log(game.getBoard()[4][2])

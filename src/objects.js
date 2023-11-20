@@ -30,4 +30,26 @@ const Ship = (positionArray, sunkStatus) => {
     }
 }
 
-export { Ship }
+const Gameboard = () => {
+    const row = 10
+    const column = 10
+    const board = []
+    const occupiedCells = []
+
+    for (let i = 0; i < row; i++) {
+        board[i] = []
+        for (let j = 0; j < column; j++) {
+            board[i].push(i.toString() + j.toString())
+        }
+
+    }
+
+    const getBoard = () => board
+
+
+    return {
+        getBoard
+    }
+}
+
+export { Ship, Gameboard }
