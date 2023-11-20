@@ -1,14 +1,18 @@
-const Ship = (position, sunk) => {
+const Ship = (positionArray, sunkStatus) => {
 
-    this.position = position
-    this.sunk = sunk
+    let position = positionArray
+    let sunk = sunkStatus
     
     const getLength = (position) => {
         return position.length
     }
 
-    const hit = () => {
+    const hit = (hitValue) => {
 
+        const index = position.indexOf(hitValue)
+        if (index > -1) {
+            position.splice(index, 1)
+        }
     }
 
     const isSunk = () => {
@@ -16,10 +20,11 @@ const Ship = (position, sunk) => {
     }
 
     return {
+        position,
         getLength,
         hit,
         isSunk
     }
 }
 
-export {Ship}
+export { Ship }
