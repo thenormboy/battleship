@@ -1,7 +1,7 @@
 import { Ship } from "./objects.js";
 
-let testCarrier = Ship(['00', '01', '02', '03'], false)
+let testCarrier = Ship(['00'], false)
 
 testCarrier.hit('00')
 
-console.log(testCarrier.position)
+console.log(testCarrier.isSunk())

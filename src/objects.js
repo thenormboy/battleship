@@ -16,12 +16,15 @@ const Ship = (positionArray, sunkStatus) => {
     }
 
     const isSunk = () => {
-        
+        if (getLength(position) == 0) {
+            sunk = true
+        }
+
+        return sunk
     }
 
     return {
         position,
-        getLength,
         hit,
         isSunk
     }
