@@ -1,4 +1,4 @@
-import { Ship } from "./objects.js";
+import { Ship, Gameboard } from "./objects.js";
 
 describe('testing ship functions', () => {
 
@@ -34,6 +34,24 @@ describe('testing ship functions', () => {
         testPatrol.hit('45')
         testPatrol.hit('55')
         expect(testPatrol.isSunk()).toBe(true)
+    })
+
+})
+
+describe('testing gameboard functions', () => {
+
+    let testBoard = Gameboard()
+    let testShips
+
+    beforeEach(() => {
+        testShips = []
+        testShips.push(Ship(['00', '01', '02', '03'], false))
+        testShips.push(Ship(['45', '55'], false))
+    })
+
+    it('placeShips accuratly fills occupiedCells with correct positions', () => {
+        testBoard.placeShips(testShips)
+        expect(testBoard.occupiedCells).toStrictEqual(['00', '01', '02', '03', '45', '55'])
     })
 
 })

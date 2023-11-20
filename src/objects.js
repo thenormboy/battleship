@@ -35,20 +35,38 @@ const Gameboard = () => {
     const column = 10
     const board = []
     const occupiedCells = []
+    const misssedCells = []
+    const hitCells = []
 
     for (let i = 0; i < row; i++) {
         board[i] = []
         for (let j = 0; j < column; j++) {
             board[i].push(i.toString() + j.toString())
         }
-
     }
 
     const getBoard = () => board
 
+    const placeShips = (ships) => {
+        ships.forEach(ship => {
+            ship.position.forEach(positionCell => {
+                occupiedCells.push(positionCell)
+            })
+        });
+    }
+
+    const recieveAttack = (coordinate) => {
+        if (occupiedCells.includes(coordinate)) {
+            hitCells.push(coordinate)
+        } else {
+            misssedCells.push(coordinate)
+        }
+    }
 
     return {
-        getBoard
+        occupiedCells,
+        getBoard,
+        placeShips
     }
 }
 
