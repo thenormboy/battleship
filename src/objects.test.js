@@ -1,4 +1,4 @@
-import { Ship, Gameboard } from "./objects.js";
+import { Ship, Gameboard, Player } from "./objects.js";
 
 describe('testing ship functions', () => {
 
@@ -81,6 +81,16 @@ describe('testing gameboard functions', () => {
         testBoard.recieveAttack('45')
         testBoard.recieveAttack('55')
         expect(testBoard.checkGameOver()).toBe(true)
+    })
+
+})
+
+describe('testing ai functions', () => {
+
+    let testComputerPlayer
+
+    beforeEach(() => {
+        testComputerPlayer = Player('comp', true)
     })
 
 })

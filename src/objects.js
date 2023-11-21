@@ -100,5 +100,39 @@ const Gameboard = () => {
     }
 }
 
+const Player = (name, isAI) => {
+    const getName = () => name
 
-export { Ship, Gameboard }
+    const row = 10
+    const column = 10
+    const possibleChoices = []
+
+    for (let i = 0; i < row; i++) {
+        possibleChoices[i] = []
+        for (let j = 0; j < column; j++) {
+            possibleChoices[i].push(i.toString() + j.toString())
+        }
+    }
+
+    const computerAttack = () => {
+
+        if (isAI = true) {
+
+            let attackCoordinate = possibleChoices[Math.floor(Math.random() * possibleChoices.length)]
+
+            const index = possibleChoices.indexOf(attackCoordinate)
+            if (index > -1) {
+                possibleChoices.splice(index, 1) 
+            }
+
+            return attackCoordinate
+        }
+    }
+
+    return {
+        getName,
+        computerAttack
+    }
+}
+
+export { Ship, Gameboard, Player }
