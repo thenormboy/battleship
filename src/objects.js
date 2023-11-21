@@ -34,9 +34,10 @@ const Gameboard = () => {
     const row = 10
     const column = 10
     const board = []
-    const occupiedCells = []
     const misssedCells = []
     const hitCells = []
+
+    let occupiedCells = []
 
     for (let i = 0; i < row; i++) {
         board[i] = []
@@ -47,10 +48,21 @@ const Gameboard = () => {
 
     const getBoard = () => board
 
+    const setOccupiedCells = newCell => {
+        occupiedCells.push(newCell)
+    }
+
+    const getOccupiedCells = () => {
+        return occupiedCells
+    }
+
     const placeShips = (ships) => {
+
+        occupiedCells = []
+
         ships.forEach(ship => {
             ship.position.forEach(positionCell => {
-                occupiedCells.push(positionCell)
+                setOccupiedCells(positionCell)
             })
         });
     }
@@ -58,16 +70,35 @@ const Gameboard = () => {
     const recieveAttack = (coordinate) => {
         if (occupiedCells.includes(coordinate)) {
             hitCells.push(coordinate)
+
         } else {
             misssedCells.push(coordinate)
+        }
+
+        const index = occupiedCells.indexOf(coordinate)
+        if (index > -1) {
+            occupiedCells.splice(index, 1) 
+        }
+    }
+
+    const checkGameOver = () =>{
+        if (occupiedCells.length == 0) {
+            return true
+        } else {
+            return false
         }
     }
 
     return {
-        occupiedCells,
+        getOccupiedCells,
+        hitCells,
+        misssedCells,
         getBoard,
-        placeShips
+        placeShips,
+        recieveAttack,
+        checkGameOver
     }
 }
+
 
 export { Ship, Gameboard }
