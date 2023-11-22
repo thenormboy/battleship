@@ -1,5 +1,3 @@
-import { Ship, Gameboard } from "./objects.js";
+import { Game } from "./game.js";
 
-let game = Gameboard()
 
-console.log(game.getBoard()[4][2])
