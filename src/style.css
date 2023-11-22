@@ -17,8 +17,22 @@
 }
 
 .player-one-gameboard div {
-
     box-sizing: border-box;
+    border: 1px solid black;
+}
 
+.player-two-gameboard {
+    height: 500px;
+    width: 500px;
+    border: 1px solid black;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.player-two-gameboard div {
+    box-sizing: border-box;
     border: 1px solid black;
 }
