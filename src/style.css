@@ -1,0 +1,24 @@
+.container {
+    height: 100vh;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.player-one-gameboard {
+    height: 500px;
+    width: 500px;
+    border: 1px solid black;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.player-one-gameboard div {
+
+    box-sizing: border-box;
+
+    border: 1px solid black;
+}
