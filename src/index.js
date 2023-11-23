@@ -15,24 +15,13 @@ function displayHeader() {
     Game.switchPlayerTurn()
 }
 
-function renderPlayerGameboard(coordinate) {
-
-    if (Game.getPlayerGameboard().getOccupiedCells().includes(coordinate)) {
-        coordinate.classList.add('occupied-cell')
-    } else if (Game.getPlayerGameboard().getEmptyCells().includes(coordinate)) {
-        coordinate.classList.add('empty-cell')
-    } else if (Game.getPlayerGameboard().getHitCells().includes(coordinate)) {
-        coordinate.classList.add('hit-cell')
-    } else if (Game.getPlayerGameboard().getMissedCells().includes(coordinate)) {
-        coordinate.classList.add('missed-cell')
-    }
-}
-
 function displayPlayerOneBoard() {
     const playerOneGameboard = document.querySelector('.player-one-gameboard');
     setPlayerShips();
     Game.getPlayerGameboard().placeShips(playerShips);
     Game.getPlayerGameboard().placeEmptySpace();
+
+    //console.log(Game.getPlayerGameboard().getEmptyCells())
 
     (Game.getPlayerGameboard().getBoard()).forEach((rowCell) => {
 
@@ -42,6 +31,8 @@ function displayPlayerOneBoard() {
             boardCell.textContent = columnCell
             boardCell.setAttribute('id', columnCell)
             boardCell.classList.add('player-one-cells')
+            boardCell.style.width = '10%'
+            boardCell.style.height = '10%'
             
             if (Game.getPlayerGameboard().getOccupiedCells().includes(boardCell.textContent)) {
                 boardCell.classList.add('occupied-cell')
@@ -53,8 +44,29 @@ function displayPlayerOneBoard() {
                 boardCell.classList.add('missed-cell')
             }
 
-            boardCell.style.width = '10%'
-            boardCell.style.height = '10%'
+            function playerCellClick() {
+
+                if (boardCell.classList.contains('hit-cell')) {
+                    return
+                } else if (boardCell.classList.contains('missed-cell')) {
+                    return
+                }
+            
+                if (boardCell.classList.contains('occupied-cell')) {
+                    boardCell.classList.remove('occupied-cell')
+                    boardCell.classList.add('hit-cell')
+                }
+            
+                if (boardCell.classList.contains('empty-cell')) {
+                    boardCell.classList.remove('empty-cell')
+                    boardCell.classList.add('missed-cell')
+                }
+            
+                boardCell.removeEventListener('click', playerCellClick)
+            
+            }
+
+            boardCell.addEventListener('click', playerCellClick)
             playerOneGameboard.appendChild(boardCell)
 
         })

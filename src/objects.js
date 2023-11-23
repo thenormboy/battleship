@@ -71,10 +71,13 @@ const Gameboard = () => {
     }
 
     const placeEmptySpace = () => {
-        getBoard().forEach(cell => {
-            if (!(getOccupiedCells().includes(cell))) {
-                setEmptyCells(cell)
-            }
+        console.log(getBoard())
+        getBoard().forEach(rowCell => {
+            rowCell.forEach(columnCell => {
+                if (!(getOccupiedCells().includes(columnCell))) {
+                    setEmptyCells(columnCell)
+                }
+            })
         })
     }
 
