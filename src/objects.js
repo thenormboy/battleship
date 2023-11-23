@@ -18,8 +18,8 @@ const Gameboard = () => {
     const board = []
     const misssedCells = []
     const hitCells = []
-
-    let occupiedCells = []
+    const emptyCells = []
+    const occupiedCells = []
 
     for (let i = 0; i < row; i++) {
         board[i] = []
@@ -30,41 +30,76 @@ const Gameboard = () => {
 
     const getBoard = () => board
 
-    const setOccupiedCells = newCell => {
-        occupiedCells.push(newCell)
+    const getMissedCells = () => {
+        return misssedCells
+    }
+
+    const setMissedCells = newCell => {
+        misssedCells.push(newCell)
+    }
+
+    const getHitCells = () => {
+        return hitCells
+    }
+
+    const setHitCells = newCell => {
+        hitCells.push(newCell)
+    }
+
+    const getEmptyCells = () => {
+        return emptyCells
+    }
+
+    const setEmptyCells = newCell => {
+        emptyCells.push(newCell)
     }
 
     const getOccupiedCells = () => {
         return occupiedCells
     }
 
+    const setOccupiedCells = newCell => {
+        occupiedCells.push(newCell)
+    }
+
     const placeShips = (ships) => {
-
-        occupiedCells = []
-
         ships.forEach(ship => {
-            ship.position.forEach(positionCell => {
+            ship.getPosition().forEach(positionCell => {
                 setOccupiedCells(positionCell)
             })
         });
     }
 
+    const placeEmptySpace = () => {
+        getBoard().forEach(cell, () => {
+            if (!(getOccupiedCells().includes(cell))) {
+                setEmptyCells(cell)
+            }
+        })
+    }
+
     const recieveAttack = (coordinate) => {
-        if (occupiedCells.includes(coordinate)) {
-            hitCells.push(coordinate)
+        if (getOccupiedCells().includes(coordinate)) {
+            setHitCells(coordinate)
 
         } else {
-            misssedCells.push(coordinate)
+            setMissedCells(coordinate)
         }
 
-        const index = occupiedCells.indexOf(coordinate)
-        if (index > -1) {
-            occupiedCells.splice(index, 1) 
+        const occupiedIndex = getOccupiedCells().indexOf(coordinate)
+        if (occupiedIndex > -1) {
+            getOccupiedCells().splice(occupiedIndex, 1) 
         }
+
+        const emptyIndex = getEmptyCells().indexOf(coordinate)
+        if (emptyIndex > -1) {
+            getEmptyCells().splice(emptyIndex, 1)
+        }
+
     }
 
     const checkGameOver = () =>{
-        if (occupiedCells.length == 0) {
+        if (getOccupiedCells.length == 0) {
             return true
         } else {
             return false
@@ -72,11 +107,17 @@ const Gameboard = () => {
     }
 
     return {
+        getMissedCells,
+        setMissedCells,
+        getHitCells,
+        setHitCells,
+        getEmptyCells,
+        setEmptyCells,
         getOccupiedCells,
-        hitCells,
-        misssedCells,
+        setOccupiedCells,
         getBoard,
         placeShips,
+        placeEmptySpace,
         recieveAttack,
         checkGameOver
     }
@@ -84,6 +125,7 @@ const Gameboard = () => {
 
 const Player = (name, isAI) => {
     const getName = () => name
+    const getIsAI = () => isAI
 
     const row = 10
     const column = 10
@@ -98,7 +140,7 @@ const Player = (name, isAI) => {
 
     const computerAttack = () => {
 
-        if (isAI = true) {
+        if (getIsAI == true) {
 
             let attackCoordinate = possibleChoices[Math.floor(Math.random() * possibleChoices.length)]
 

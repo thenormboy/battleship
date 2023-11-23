@@ -2,10 +2,11 @@ import { Ship, Gameboard, Player } from "./objects.js";
 
 describe('testing gameboard functions', () => {
 
-    let testBoard = Gameboard()
+    let testBoard
     let testShips
 
     beforeEach(() => {
+        testBoard = Gameboard()
         testShips = []
         testShips.push(Ship(['00', '01', '02', '03'], false))
         testShips.push(Ship(['45', '55'], false))
@@ -19,7 +20,7 @@ describe('testing gameboard functions', () => {
     it('recieveAttack fills hit cells with correct coordinate if cell is occupied', () => {
         testBoard.placeShips(testShips)
         testBoard.recieveAttack('02')
-        expect(testBoard.hitCells).toStrictEqual(['02'])
+        expect(testBoard.getHitCells()).toStrictEqual(['02'])
     })
 
     it('recieveAttack removes occupied cell from all occupied cells after being hit', () => {
@@ -31,7 +32,7 @@ describe('testing gameboard functions', () => {
     it('recieveAttack adds cell to missed cells if coordinate not occupied', () => {
         testBoard.placeShips(testShips)
         testBoard.recieveAttack('99')
-        expect(testBoard.misssedCells).toStrictEqual(['99'])
+        expect(testBoard.getMissedCells()).toStrictEqual(['99'])
     })
 
     it('checkGameOver returns true when all occupied spaces have been hit', () => {
