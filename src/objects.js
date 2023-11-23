@@ -71,7 +71,7 @@ const Gameboard = () => {
     }
 
     const placeEmptySpace = () => {
-        getBoard().forEach(cell, () => {
+        getBoard().forEach(cell => {
             if (!(getOccupiedCells().includes(cell))) {
                 setEmptyCells(cell)
             }

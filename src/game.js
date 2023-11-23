@@ -5,22 +5,29 @@ const Game = (() => {
     let players = []
     let gameboards = []
 
-    let playerOne = Player('Player One', false)
-    let playerOneGameboard = Gameboard()
+    let player = Player('Player', false)
+    let playerGameboard = Gameboard()
 
     let computer = Player('Computer', true)
     let computerGameboard = Gameboard()
 
-    players.push(playerOne)
+    players.push(player)
     players.push(computer)
 
-    gameboards.push(playerOneGameboard, computerGameboard)
+    gameboards.push(playerGameboard)
+    gameboards.push(computerGameboard)
 
     let activePlayer = players[0]
     let activeBoard = gameboards[0]
 
     const getActivePlayer = () => activePlayer
     const getActiveGameboard = () => activeBoard
+
+    const getPlayer = () => player
+    const getComputer = () => computer
+
+    const getPlayerGameboard = () => playerGameboard
+    const getComputerGameboard = () => computerGameboard
 
     const switchPlayerTurn = () => {
         if (activePlayer === players[0]) {
@@ -38,25 +45,11 @@ const Game = (() => {
         }
     }
 
-    let playerOneShips = []
-
-    function setPlayerOneShips() {
-        carrier = Ship(['42', '43', '44', '45', '46'], false)
-        battleship = Ship(['09', '19', '29', '39'], false)
-        destroyer = Ship(['72', '73', '74'], false)
-        submarine = Ship(['67', '77', '87'], false)
-        patrol = Ship(['11', '12'], false)
-
-        playerOneShips.push(carrier)
-        playerOneShips.push(battleship)
-        playerOneShips.push(destroyer)
-        playerOneShips.push(submarine)
-        playerOneShips.push(patrol)
-    }
-
-
-
     return {
+        getPlayer,
+        getPlayerGameboard,
+        getComputer,
+        getComputerGameboard,
         getActivePlayer,
         getActiveGameboard,
         switchPlayerTurn,

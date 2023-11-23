@@ -36,3 +36,19 @@
     box-sizing: border-box;
     border: 1px solid black;
 }
+
+.occupied-cell {
+    background: black;
+}
+
+.empty-cell {
+    background: white;
+}
+
+.hit-cell {
+    background: red;
+}
+
+.missed-cell {
+    background: gray;
+}
