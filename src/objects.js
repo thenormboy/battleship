@@ -71,7 +71,6 @@ const Gameboard = () => {
     }
 
     const placeEmptySpace = () => {
-        console.log(getBoard())
         getBoard().forEach(rowCell => {
             rowCell.forEach(columnCell => {
                 if (!(getOccupiedCells().includes(columnCell))) {
@@ -126,34 +125,31 @@ const Gameboard = () => {
     }
 }
 
-const Player = (name, isAI) => {
+const Player = (name) => {
     const getName = () => name
-    const getIsAI = () => isAI
 
     const row = 10
     const column = 10
     const possibleChoices = []
 
     for (let i = 0; i < row; i++) {
-        possibleChoices[i] = []
         for (let j = 0; j < column; j++) {
-            possibleChoices[i].push(i.toString() + j.toString())
+            possibleChoices.push(i.toString() + j.toString())
         }
     }
 
+    const getPossibleChoices = () => possibleChoices
+
     const computerAttack = () => {
 
-        if (getIsAI == true) {
+            let attackCoordinate = getPossibleChoices()[Math.floor(Math.random() * getPossibleChoices().length)]
 
-            let attackCoordinate = possibleChoices[Math.floor(Math.random() * possibleChoices.length)]
-
-            const index = possibleChoices.indexOf(attackCoordinate)
+            const index = getPossibleChoices().indexOf(attackCoordinate)
             if (index > -1) {
                 possibleChoices.splice(index, 1) 
             }
 
             return attackCoordinate
-        }
     }
 
     return {

@@ -5,10 +5,10 @@ const Game = (() => {
     let players = []
     let gameboards = []
 
-    let player = Player('Player', false)
+    let player = Player('Player')
     let playerGameboard = Gameboard()
 
-    let computer = Player('Computer', true)
+    let computer = Player('Computer')
     let computerGameboard = Gameboard()
 
     players.push(player)
