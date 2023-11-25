@@ -20,6 +20,7 @@ function displayPlayerOneBoard() {
     playerOneGameboard.textContent = [];
 
     let attackCoordinate = Game.getComputer().computerAttack();
+    console.log(attackCoordinate);
 
     (Game.getPlayerGameboard().getBoard()).forEach((rowCell) => {
 
@@ -57,7 +58,8 @@ function displayPlayerOneBoard() {
                     }
 
                     Game.getPlayerGameboard().recieveAttack(attackCoordinate)
-                    displayPlayerTwoBoard()
+                    console.log(Game.getPlayerGameboard().getMissedCells())
+                    console.log(Game.getPlayerGameboard().getEmptyCells())
                 }
             }
 
@@ -71,7 +73,9 @@ function displayPlayerOneBoard() {
 
 function displayPlayerTwoBoard() {
     const playerTwoGameboard = document.querySelector('.player-two-gameboard');
-    playerTwoGameboard.textContent = '';
+    setComputerShips();
+    Game.getComputerGameboard().placeShips(computerShips);
+    Game.getComputerGameboard().placeEmptySpace();
 
     (Game.getComputerGameboard().getBoard()).forEach((rowCell) => {
 
@@ -94,15 +98,6 @@ function displayPlayerTwoBoard() {
                 boardCell.classList.add('missed-cell')
             }
 
-            function disableAllButtons() {
-                const boardCells = document.querySelectorAll('.player-two-cells')
-
-                boardCells.forEach((cell) => {
-                    cell.replaceWith(cell.cloneNode(true))
-                })
-
-            }
-
             function computerCellClick() {
 
                 if (boardCell.classList.contains('hit-cell')) {
@@ -114,22 +109,21 @@ function displayPlayerTwoBoard() {
                 if (boardCell.classList.contains('occupied-com-cell')) {
                     boardCell.classList.remove('occupied-com-cell')
                     boardCell.classList.add('hit-cell')
-                    disableAllButtons()
                 }
             
                 if (boardCell.classList.contains('empty-cell')) {
                     boardCell.classList.remove('empty-cell')
                     boardCell.classList.add('missed-cell')
-                    disableAllButtons()
                 }
-
-                Game.getComputerGameboard().recieveAttack(boardCell.textContent)
-                displayPlayerOneBoard()
+            
+                boardCell.removeEventListener('click', computerCellClick)
             
             }
 
             boardCell.addEventListener('click', computerCellClick)
+
             playerTwoGameboard.appendChild(boardCell)
+
         })
     })
 }
@@ -169,35 +163,11 @@ function setComputerShips() {
     computerShips.push(destroyer)
     computerShips.push(submarine)
     computerShips.push(patrol)
-
-    Game.getComputerGameboard().placeShips(computerShips);
-    Game.getComputerGameboard().placeEmptySpace();
 }
 
-function gameController() {
-
-    displayHeader()
-    setPlayerShips();
-    setComputerShips();
-    displayPlayerOneBoard()
-    displayPlayerTwoBoard()
-
-    //console.log(Game.getPlayerGameboard().getOccupiedCells().length)
-
-    //console.log((Game.getPlayerGameboard().checkGameOver()))
-
-    //while (!(Game.getComputerGameboard().checkGameOver()) || !(Game.getPlayerGameboard().checkGameOver())) {
-
-        //console.log(Game.getActivePlayer())
-
-        //if (Game.getActivePlayer() == Game.getPlayer()) {
-          //  displayPlayerTwoBoard()
-        //} else if (Game.getActiveGameboard() == Game.getComputer()) {
-          //  displayPlayerOneBoard()
-        //}
-
-        //Game.switchPlayerTurn()
-
-}
-
-gameController()
+displayHeader()
+setPlayerShips();
+displayPlayerOneBoard()
+displayPlayerOneBoard()
+displayPlayerOneBoard()
+displayPlayerTwoBoard()

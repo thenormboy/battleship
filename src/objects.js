@@ -101,7 +101,7 @@ const Gameboard = () => {
     }
 
     const checkGameOver = () =>{
-        if (getOccupiedCells.length == 0) {
+        if (getOccupiedCells().length == 0) {
             return true
         } else {
             return false
