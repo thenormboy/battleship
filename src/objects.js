@@ -7,54 +7,135 @@ const Ship = (position) => {
     }
 
     const createCarrier = (coordinate, orientation) => {
-        for (let i = 0; i < 4; i++) {
-            if (orientation == 'X') {
-                setPosition(coordinate + i)
-            } else if (orientation == 'Y') {
-                setPosition(coordinate + (i * 10))
+        coordinate = Number(coordinate)
+
+        if (coordinate.toString().length == 1) {
+
+            setPosition('0' + String(coordinate))
+
+            for (let i = 1; i < 5; i++) {
+                if (orientation == 'X') {
+                    setPosition('0' + String(coordinate + i))
+                } else if (orientation == 'Y') {
+                    setPosition(String(coordinate + (i * 10)))
+                }
+            }
+
+        } else {
+
+            for (let i = 0; i < 5; i++) {
+                if (orientation == 'X') {
+                    setPosition(String(coordinate + i))
+                } else if (orientation == 'Y') {
+                    setPosition(String(coordinate + (i * 10)))
+                }
             }
         }
     }
 
     function createBattleship(coordinate, orientation) {
-        for (let i = 0; i < 3; i++) {
-            if (orientation == 'X') {
-                setPosition(coordinate + i)
-            } else if (orientation == 'Y') {
-                setPosition(coordinate + (i * 10))
+        coordinate = Number(coordinate)
+
+        if (coordinate.toString().length == 1) {
+
+            setPosition('0' + String(coordinate))
+
+            for (let i = 1; i < 4; i++) {
+                if (orientation == 'X') {
+                    setPosition('0' + String(coordinate + i))
+                } else if (orientation == 'Y') {
+                    setPosition(String(coordinate + (i * 10)))
+                }
             }
-        }
-    }
+
+        } else {
+
+            for (let i = 0; i < 4; i++) {
+                if (orientation == 'X') {
+                    setPosition(String(coordinate + i))
+                } else if (orientation == 'Y') {
+                    setPosition(String(coordinate + (i * 10)))
+                }
+            }
+        }    }
 
     function createDestroyer(coordinate, orientation) {
-        for (let i = 0; i < 3; i++) {
-            if (orientation == 'X') {
-                setPosition(coordinate + i)
-            } else if (orientation == 'Y') {
-                setPosition(coordinate + (i * 10))
+        coordinate = Number(coordinate)
+
+        if (coordinate.toString().length == 1) {
+
+            setPosition('0' + String(coordinate))
+
+            for (let i = 1; i < 4; i++) {
+                if (orientation == 'X') {
+                    setPosition('0' + String(coordinate + i))
+                } else if (orientation == 'Y') {
+                    setPosition(String(coordinate + (i * 10)))
+                }
             }
-        }
-    }
+
+        } else {
+
+            for (let i = 0; i < 4; i++) {
+                if (orientation == 'X') {
+                    setPosition(String(coordinate + i))
+                } else if (orientation == 'Y') {
+                    setPosition(String(coordinate + (i * 10)))
+                }
+            }
+        }    }
 
     function createSubmarine(coordinate, orientation) {
-        for (let i = 0; i < 2; i++) {
-            if (orientation == 'X') {
-                setPosition(coordinate + i)
-            } else if (orientation == 'Y') {
-                setPosition(coordinate + (i * 10))
+        coordinate = Number(coordinate)
+
+        if (coordinate.toString().length == 1) {
+
+            setPosition('0' + String(coordinate))
+
+            for (let i = 1; i < 3; i++) {
+                if (orientation == 'X') {
+                    setPosition('0' + String(coordinate + i))
+                } else if (orientation == 'Y') {
+                    setPosition(String(coordinate + (i * 10)))
+                }
             }
-        }
-    }
+
+        } else {
+
+            for (let i = 0; i < 3; i++) {
+                if (orientation == 'X') {
+                    setPosition(String(coordinate + i))
+                } else if (orientation == 'Y') {
+                    setPosition(String(coordinate + (i * 10)))
+                }
+            }
+        }    }
 
     function createPatrol(coordinate, orientation) {
-        for (let i = 0; i < 1; i++) {
-            if (orientation == 'X') {
-                setPosition(coordinate + i)
-            } else if (orientation == 'Y') {
-                setPosition(coordinate + (i * 10))
+        coordinate = Number(coordinate)
+
+        if (coordinate.toString().length == 1) {
+
+            setPosition('0' + String(coordinate))
+
+            for (let i = 1; i < 2; i++) {
+                if (orientation == 'X') {
+                    setPosition('0' + String(coordinate + i))
+                } else if (orientation == 'Y') {
+                    setPosition(String(coordinate + (i * 10)))
+                }
             }
-        }
-    }
+
+        } else {
+
+            for (let i = 0; i < 2; i++) {
+                if (orientation == 'X') {
+                    setPosition(String(coordinate + i))
+                } else if (orientation == 'Y') {
+                    setPosition(String(coordinate + (i * 10)))
+                }
+            }
+        }    }
 
     return {
         getPosition,

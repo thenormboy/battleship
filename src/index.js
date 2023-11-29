@@ -138,11 +138,17 @@ function displayPlayerTwoBoard() {
 let playerShips = []
 
 function setPlayerShips() {
-    let carrier = Ship(['42', '43', '44', '45', '46'])
-    let battleship = Ship(['09', '19', '29', '39'])
-    let destroyer = Ship(['72', '73', '74'])
-    let submarine = Ship(['67', '77', '87'])
-    let patrol = Ship(['11', '12'])
+    let carrier = Ship([])
+    let battleship = Ship([])
+    let destroyer = Ship([])
+    let submarine = Ship([])
+    let patrol = Ship([])
+
+    carrier.createCarrier('01', 'Y')
+    battleship.createBattleship('13', 'X')
+    destroyer.createDestroyer('71', 'X')
+    submarine.createSubmarine('76', 'Y')
+    patrol.createPatrol('53', 'X')
 
     playerShips.push(carrier)
     playerShips.push(battleship)
