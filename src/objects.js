@@ -6,9 +6,64 @@ const Ship = (position) => {
         getPosition().push(coords)
     }
 
+    const createCarrier = (coordinate, orientation) => {
+        for (let i = 0; i < 4; i++) {
+            if (orientation == 'X') {
+                setPosition(coordinate + i)
+            } else if (orientation == 'Y') {
+                setPosition(coordinate + (i * 10))
+            }
+        }
+    }
+
+    function createBattleship(coordinate, orientation) {
+        for (let i = 0; i < 3; i++) {
+            if (orientation == 'X') {
+                setPosition(coordinate + i)
+            } else if (orientation == 'Y') {
+                setPosition(coordinate + (i * 10))
+            }
+        }
+    }
+
+    function createDestroyer(coordinate, orientation) {
+        for (let i = 0; i < 3; i++) {
+            if (orientation == 'X') {
+                setPosition(coordinate + i)
+            } else if (orientation == 'Y') {
+                setPosition(coordinate + (i * 10))
+            }
+        }
+    }
+
+    function createSubmarine(coordinate, orientation) {
+        for (let i = 0; i < 2; i++) {
+            if (orientation == 'X') {
+                setPosition(coordinate + i)
+            } else if (orientation == 'Y') {
+                setPosition(coordinate + (i * 10))
+            }
+        }
+    }
+
+    function createPatrol(coordinate, orientation) {
+        for (let i = 0; i < 1; i++) {
+            if (orientation == 'X') {
+                setPosition(coordinate + i)
+            } else if (orientation == 'Y') {
+                setPosition(coordinate + (i * 10))
+            }
+        }
+    }
+
     return {
         getPosition,
-        setPosition
+        setPosition,
+        createCarrier,
+        createBattleship,
+        createDestroyer,
+        createSubmarine,
+        createPatrol
     }
 }
 
