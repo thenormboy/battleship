@@ -85,7 +85,7 @@ function displayPlayerTwoBoard() {
             boardCell.style.height = '10%'
 
             if (Game.getComputerGameboard().getOccupiedCells().includes(boardCell.textContent)) {
-                boardCell.classList.add('occupied-com-cell')
+                boardCell.classList.add('occupied-cell')
             } else if (Game.getComputerGameboard().getEmptyCells().includes(boardCell.textContent)) {
                 boardCell.classList.add('empty-cell')
             } else if (Game.getComputerGameboard().getHitCells().includes(boardCell.textContent)) {
@@ -111,8 +111,8 @@ function displayPlayerTwoBoard() {
                     return
                 }
             
-                if (boardCell.classList.contains('occupied-com-cell')) {
-                    boardCell.classList.remove('occupied-com-cell')
+                if (boardCell.classList.contains('occupied-cell')) {
+                    boardCell.classList.remove('occupied-cell')
                     boardCell.classList.add('hit-cell')
                     disableAllButtons()
                 }
@@ -156,7 +156,6 @@ function setPlayerShips() {
     playerShips.push(submarine)
     playerShips.push(patrol)
 
-
     Game.getPlayerGameboard().placeShips(playerShips);
     Game.getPlayerGameboard().placeEmptySpace();
 }
@@ -164,20 +163,38 @@ function setPlayerShips() {
 let computerShips = []
 
 function setComputerShips() {
-    let carrier = Ship(['42', '43', '44', '45', '46'])
-    let battleship = Ship(['09', '19', '29', '39'])
-    let destroyer = Ship(['72', '73', '74'])
-    let submarine = Ship(['67', '77', '87'])
-    let patrol = Ship(['11', '12'])
 
+    Game.getComputerGameboard().placeEmptySpace();
+
+    let carrier = Ship([])
+    carrier.createCarrier(String(Game.getComputerGameboard().computerPosition()), Game.getComputerGameboard().computerOrientation())
     computerShips.push(carrier)
-    computerShips.push(battleship)
-    computerShips.push(destroyer)
-    computerShips.push(submarine)
-    computerShips.push(patrol)
 
     Game.getComputerGameboard().placeShips(computerShips);
     Game.getComputerGameboard().placeEmptySpace();
+
+    //let battleship = Ship([])
+    //let destroyer = Ship([])
+    //let submarine = Ship([])
+    //let patrol = Ship([])
+
+    //battleship.createBattleship('13', 'X')
+    //destroyer.createDestroyer('71', 'X')
+    //submarine.createSubmarine('76', 'Y')
+    //patrol.createPatrol('53', 'X')
+
+    //computerShips.push(battleship)
+    //computerShips.push(destroyer)
+    //computerShips.push(submarine)
+    //computerShips.push(patrol)
+
+//    for (let i = 0; i < 5; i++) {
+
+  //      Game.getComputerGameboard().placeShips(computerShips);
+    //    Game.getComputerGameboard().placeEmptySpace();
+
+    //}
+
 }
 
 function gameController() {
@@ -187,23 +204,6 @@ function gameController() {
     setComputerShips();
     displayPlayerOneBoard()
     displayPlayerTwoBoard()
-
-    //console.log(Game.getPlayerGameboard().getOccupiedCells().length)
-
-    //console.log((Game.getPlayerGameboard().checkGameOver()))
-
-    //while (!(Game.getComputerGameboard().checkGameOver()) || !(Game.getPlayerGameboard().checkGameOver())) {
-
-        //console.log(Game.getActivePlayer())
-
-        //if (Game.getActivePlayer() == Game.getPlayer()) {
-          //  displayPlayerTwoBoard()
-        //} else if (Game.getActiveGameboard() == Game.getComputer()) {
-          //  displayPlayerOneBoard()
-        //}
-
-        //Game.switchPlayerTurn()
-
 }
 
 gameController()

@@ -244,6 +244,19 @@ const Gameboard = () => {
         }
     }
 
+    const computerPosition = () => {
+
+        return getEmptyCells()[Math.floor(Math.random() * getEmptyCells().length)]
+    }
+
+    const computerOrientation = () => {
+
+        let orientations = ['X', 'Y']
+
+        return orientations[Math.floor(Math.random() * orientations.length)]
+
+    }
+
     return {
         getMissedCells,
         setMissedCells,
@@ -257,7 +270,9 @@ const Gameboard = () => {
         placeShips,
         placeEmptySpace,
         recieveAttack,
-        checkGameOver
+        checkGameOver,
+        computerPosition,
+        computerOrientation
     }
 }
 
