@@ -167,14 +167,28 @@ function setComputerShips() {
     Game.getComputerGameboard().placeEmptySpace();
 
     let carrier = Ship([])
-    carrier.createCarrier(String(Game.getComputerGameboard().computerPosition()), Game.getComputerGameboard().computerOrientation())
+    carrier.createCarrier(String(100), Game.getComputerGameboard().computerOrientation())
     computerShips.push(carrier)
 
     Game.getComputerGameboard().placeShips(computerShips);
     Game.getComputerGameboard().placeEmptySpace();
 
-    //let battleship = Ship([])
-    //let destroyer = Ship([])
+
+    let battleship = Ship([])
+
+    while (Game.getComputerGameboard().checkOccupation(battleship.getPosition())) {
+
+        battleship = Ship([])
+        battleship.createBattleship(String(100), Game.getComputerGameboard().computerOrientation())
+
+    }
+
+    computerShips.push(battleship)
+    Game.getComputerGameboard().placeShips(computerShips);
+    Game.getComputerGameboard().placeEmptySpace();
+
+
+    let destroyer = Ship([])
     //let submarine = Ship([])
     //let patrol = Ship([])
 

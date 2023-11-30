@@ -7,6 +7,28 @@ const Ship = (position) => {
     }
 
     const createCarrier = (coordinate, orientation) => {
+
+        let possibleChoices = []
+
+        if (coordinate == 100) {
+            if (orientation == 'X') {
+                for (let i = 0; i < 10; i++) {
+                    for (let j = 0; j < 6; j++) {
+                        possibleChoices.push(i.toString() + j.toString())
+                    }
+                }
+            } else if (orientation == 'Y') {
+                for (let i = 0; i < 6; i++) {
+                    for (let j = 0; j < 10; j++) {
+                        possibleChoices.push(i.toString() + j.toString())
+                    }
+                }
+            }
+
+            coordinate = possibleChoices[Math.floor(Math.random() * possibleChoices.length)]
+
+        }
+
         coordinate = Number(coordinate)
 
         if (coordinate.toString().length == 1) {
@@ -34,6 +56,29 @@ const Ship = (position) => {
     }
 
     function createBattleship(coordinate, orientation) {
+
+
+        let possibleChoices = []
+
+        if (coordinate == 100) {
+            if (orientation == 'X') {
+                for (let i = 0; i < 10; i++) {
+                    for (let j = 0; j < 7; j++) {
+                        possibleChoices.push(i.toString() + j.toString())
+                    }
+                }
+            } else if (orientation == 'Y') {
+                for (let i = 0; i < 7; i++) {
+                    for (let j = 0; j < 10; j++) {
+                        possibleChoices.push(i.toString() + j.toString())
+                    }
+                }
+            }
+
+            coordinate = possibleChoices[Math.floor(Math.random() * possibleChoices.length)]
+
+        }
+
         coordinate = Number(coordinate)
 
         if (coordinate.toString().length == 1) {
@@ -244,17 +289,25 @@ const Gameboard = () => {
         }
     }
 
-    const computerPosition = () => {
-
-        return getEmptyCells()[Math.floor(Math.random() * getEmptyCells().length)]
-    }
-
     const computerOrientation = () => {
 
         let orientations = ['X', 'Y']
 
         return orientations[Math.floor(Math.random() * orientations.length)]
 
+    }
+
+    const checkOccupation = (testArray) => {
+
+        if (testArray.length == 0) {
+            return true
+        }
+
+        for (let i = 0; i < testArray.length; i++) {
+            if (getOccupiedCells().includes(testArray[i])) {
+                return true
+            }
+        }
     }
 
     return {
@@ -271,8 +324,8 @@ const Gameboard = () => {
         placeEmptySpace,
         recieveAttack,
         checkGameOver,
-        computerPosition,
-        computerOrientation
+        computerOrientation,
+        checkOccupation
     }
 }
 
