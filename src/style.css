@@ -52,3 +52,7 @@
 .missed-cell {
     background: gray;
 }
+
+.occupied-com-cell {
+    background: green;
+}

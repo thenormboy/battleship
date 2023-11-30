@@ -105,6 +105,30 @@ const Ship = (position) => {
         }    }
 
     function createDestroyer(coordinate, orientation) {
+
+
+
+        let possibleChoices = []
+
+        if (coordinate == 100) {
+            if (orientation == 'X') {
+                for (let i = 0; i < 10; i++) {
+                    for (let j = 0; j < 7; j++) {
+                        possibleChoices.push(i.toString() + j.toString())
+                    }
+                }
+            } else if (orientation == 'Y') {
+                for (let i = 0; i < 7; i++) {
+                    for (let j = 0; j < 10; j++) {
+                        possibleChoices.push(i.toString() + j.toString())
+                    }
+                }
+            }
+
+            coordinate = possibleChoices[Math.floor(Math.random() * possibleChoices.length)]
+
+        }
+
         coordinate = Number(coordinate)
 
         if (coordinate.toString().length == 1) {
@@ -131,6 +155,29 @@ const Ship = (position) => {
         }    }
 
     function createSubmarine(coordinate, orientation) {
+
+
+        let possibleChoices = []
+
+        if (coordinate == 100) {
+            if (orientation == 'X') {
+                for (let i = 0; i < 10; i++) {
+                    for (let j = 0; j < 8; j++) {
+                        possibleChoices.push(i.toString() + j.toString())
+                    }
+                }
+            } else if (orientation == 'Y') {
+                for (let i = 0; i < 8; i++) {
+                    for (let j = 0; j < 10; j++) {
+                        possibleChoices.push(i.toString() + j.toString())
+                    }
+                }
+            }
+
+            coordinate = possibleChoices[Math.floor(Math.random() * possibleChoices.length)]
+
+        }
+
         coordinate = Number(coordinate)
 
         if (coordinate.toString().length == 1) {
@@ -157,6 +204,29 @@ const Ship = (position) => {
         }    }
 
     function createPatrol(coordinate, orientation) {
+
+
+        let possibleChoices = []
+
+        if (coordinate == 100) {
+            if (orientation == 'X') {
+                for (let i = 0; i < 10; i++) {
+                    for (let j = 0; j < 9; j++) {
+                        possibleChoices.push(i.toString() + j.toString())
+                    }
+                }
+            } else if (orientation == 'Y') {
+                for (let i = 0; i < 9; i++) {
+                    for (let j = 0; j < 10; j++) {
+                        possibleChoices.push(i.toString() + j.toString())
+                    }
+                }
+            }
+
+            coordinate = possibleChoices[Math.floor(Math.random() * possibleChoices.length)]
+
+        }
+
         coordinate = Number(coordinate)
 
         if (coordinate.toString().length == 1) {

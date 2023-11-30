@@ -85,7 +85,7 @@ function displayPlayerTwoBoard() {
             boardCell.style.height = '10%'
 
             if (Game.getComputerGameboard().getOccupiedCells().includes(boardCell.textContent)) {
-                boardCell.classList.add('occupied-cell')
+                boardCell.classList.add('occupied-com-cell')
             } else if (Game.getComputerGameboard().getEmptyCells().includes(boardCell.textContent)) {
                 boardCell.classList.add('empty-cell')
             } else if (Game.getComputerGameboard().getHitCells().includes(boardCell.textContent)) {
@@ -111,8 +111,8 @@ function displayPlayerTwoBoard() {
                     return
                 }
             
-                if (boardCell.classList.contains('occupied-cell')) {
-                    boardCell.classList.remove('occupied-cell')
+                if (boardCell.classList.contains('occupied-com-cell')) {
+                    boardCell.classList.remove('occupied-com-cell')
                     boardCell.classList.add('hit-cell')
                     disableAllButtons()
                 }
@@ -189,25 +189,43 @@ function setComputerShips() {
 
 
     let destroyer = Ship([])
-    //let submarine = Ship([])
-    //let patrol = Ship([])
 
-    //battleship.createBattleship('13', 'X')
-    //destroyer.createDestroyer('71', 'X')
-    //submarine.createSubmarine('76', 'Y')
-    //patrol.createPatrol('53', 'X')
+    while (Game.getComputerGameboard().checkOccupation(destroyer.getPosition())) {
 
-    //computerShips.push(battleship)
-    //computerShips.push(destroyer)
-    //computerShips.push(submarine)
-    //computerShips.push(patrol)
+        destroyer = Ship([])
+        destroyer.createDestroyer(String(100), Game.getComputerGameboard().computerOrientation())
 
-//    for (let i = 0; i < 5; i++) {
+    }
 
-  //      Game.getComputerGameboard().placeShips(computerShips);
-    //    Game.getComputerGameboard().placeEmptySpace();
+    computerShips.push(destroyer)
+    Game.getComputerGameboard().placeShips(computerShips);
+    Game.getComputerGameboard().placeEmptySpace();
 
-    //}
+    let submarine = Ship([])
+
+    while (Game.getComputerGameboard().checkOccupation(submarine.getPosition())) {
+
+        submarine = Ship([])
+        submarine.createSubmarine(String(100), Game.getComputerGameboard().computerOrientation())
+
+    }
+
+    computerShips.push(submarine)
+    Game.getComputerGameboard().placeShips(computerShips);
+    Game.getComputerGameboard().placeEmptySpace();
+
+    let patrol = Ship([])
+
+    while (Game.getComputerGameboard().checkOccupation(patrol.getPosition())) {
+
+        patrol = Ship([])
+        patrol.createPatrol(String(100), Game.getComputerGameboard().computerOrientation())
+
+    }
+
+    computerShips.push(patrol)
+    Game.getComputerGameboard().placeShips(computerShips);
+    Game.getComputerGameboard().placeEmptySpace();
 
 }
 
