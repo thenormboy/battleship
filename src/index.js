@@ -134,6 +134,76 @@ function displayPlayerTwoBoard() {
     })
 }
 
+function displayPlaceShipsBoard() {
+    const playerOneGameboard = document.querySelector('.player-one-gameboard');
+    playerOneGameboard.textContent = [];
+
+    let carrier = Ship([]);
+    let possibleChoices = carrier.carrierChoices(globalCoordinate);
+
+    (Game.getPlayerGameboard().getBoard()).forEach((rowCell) => {
+
+        rowCell.forEach((columnCell) => {
+
+            const boardCell = document.createElement('div')
+            boardCell.textContent = columnCell
+            boardCell.setAttribute('id', columnCell)
+            boardCell.classList.add('player-one-cells-place')
+            boardCell.style.width = '10%'
+            boardCell.style.height = '10%'
+
+            function playerCarrierCell() {
+
+                boardCell.addEventListener('mouseenter', () => {
+                    boardCell.style.backgroundColor = 'yellow'
+                })
+
+                boardCell.addEventListener('mouseleave', () => {
+                    boardCell.style.backgroundColor = ''
+                })
+
+            }
+
+            function playerCarrierClick() {
+                boardCell.addEventListener('click', () => {
+                    carrier.createCarrier(boardCell.getAttribute('id'), globalCoordinate)
+                    playerShips.push(carrier)
+                    Game.getPlayerGameboard().placeShips(playerShips);
+                    Game.getPlayerGameboard().placeEmptySpace();
+                    displayPlayerOneBoard()
+                    return
+                })
+            }
+
+            if (possibleChoices.includes(boardCell.getAttribute('id'))) {
+
+                playerCarrierCell()
+                playerCarrierClick()
+            }
+
+
+            playerOneGameboard.appendChild(boardCell)
+
+        })
+    })
+}
+
+let globalCoordinate = "X"
+
+function setRotateButton() {
+    
+    const rotateButton = document.getElementById('rotate')
+
+    rotateButton.addEventListener('click', () => {
+        if (globalCoordinate == 'X') {
+            globalCoordinate = 'Y'
+        } else {
+            globalCoordinate = 'X'
+        }
+        displayPlaceShipsBoard()
+    })
+}
+
 
 let playerShips = []
 
@@ -156,8 +226,8 @@ function setPlayerShips() {
     playerShips.push(submarine)
     playerShips.push(patrol)
 
-    Game.getPlayerGameboard().placeShips(playerShips);
-    Game.getPlayerGameboard().placeEmptySpace();
+    //Game.getPlayerGameboard().placeShips(playerShips);
+    //Game.getPlayerGameboard().placeEmptySpace();
 }
 
 let computerShips = []
@@ -230,12 +300,9 @@ function setComputerShips() {
 }
 
 function gameController() {
+    setRotateButton()
+    displayPlaceShipsBoard()
 
-    displayHeader()
-    setPlayerShips();
-    setComputerShips();
-    displayPlayerOneBoard()
-    displayPlayerTwoBoard()
 }
 
 gameController()

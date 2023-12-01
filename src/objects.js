@@ -6,24 +6,33 @@ const Ship = (position) => {
         getPosition().push(coords)
     }
 
-    const createCarrier = (coordinate, orientation) => {
+    const carrierChoices = (orientation) => {
 
         let possibleChoices = []
 
-        if (coordinate == 100) {
-            if (orientation == 'X') {
-                for (let i = 0; i < 10; i++) {
-                    for (let j = 0; j < 6; j++) {
-                        possibleChoices.push(i.toString() + j.toString())
-                    }
-                }
-            } else if (orientation == 'Y') {
-                for (let i = 0; i < 6; i++) {
-                    for (let j = 0; j < 10; j++) {
-                        possibleChoices.push(i.toString() + j.toString())
-                    }
+        if (orientation == 'X') {
+            for (let i = 0; i < 10; i++) {
+                for (let j = 0; j < 6; j++) {
+                    possibleChoices.push(i.toString() + j.toString())
                 }
             }
+        } else if (orientation == 'Y') {
+            for (let i = 0; i < 6; i++) {
+                for (let j = 0; j < 10; j++) {
+                    possibleChoices.push(i.toString() + j.toString())
+                }
+            }
+        }
+
+        return possibleChoices
+
+    }
+
+    const createCarrier = (coordinate, orientation) => {
+
+        if (coordinate == 100) {
+
+            let possibleChoices = carrierChoices(orientation)
 
             coordinate = possibleChoices[Math.floor(Math.random() * possibleChoices.length)]
 
@@ -255,6 +264,7 @@ const Ship = (position) => {
     return {
         getPosition,
         setPosition,
+        carrierChoices,
         createCarrier,
         createBattleship,
         createDestroyer,
@@ -305,6 +315,10 @@ const Gameboard = () => {
         emptyCells.push(newCell)
     }
 
+    const clearEmptyCells = () => {
+        getEmptyCells().splice(0, getEmptyCells().length)
+    }
+
     const getOccupiedCells = () => {
         return occupiedCells
     }
@@ -313,7 +327,12 @@ const Gameboard = () => {
         occupiedCells.push(newCell)
     }
 
+    const clearOccupiedCells = () => {
+        getOccupiedCells().splice(0, getOccupiedCells().length)
+    }
+
     const placeShips = (ships) => {
+        clearOccupiedCells()
         ships.forEach(ship => {
             ship.getPosition().forEach(positionCell => {
                 setOccupiedCells(positionCell)
@@ -322,6 +341,7 @@ const Gameboard = () => {
     }
 
     const placeEmptySpace = () => {
+        clearEmptyCells()
         getBoard().forEach(rowCell => {
             rowCell.forEach(columnCell => {
                 if (!(getOccupiedCells().includes(columnCell))) {
