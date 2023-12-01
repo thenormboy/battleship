@@ -6,18 +6,18 @@ const Ship = (position) => {
         getPosition().push(coords)
     }
 
-    const carrierChoices = (orientation) => {
+    const shipChoices = (orientation, length) => {
 
         let possibleChoices = []
 
         if (orientation == 'X') {
             for (let i = 0; i < 10; i++) {
-                for (let j = 0; j < 6; j++) {
+                for (let j = 0; j < (11 - length); j++) {
                     possibleChoices.push(i.toString() + j.toString())
                 }
             }
         } else if (orientation == 'Y') {
-            for (let i = 0; i < 6; i++) {
+            for (let i = 0; i < (11 - length); i++) {
                 for (let j = 0; j < 10; j++) {
                     possibleChoices.push(i.toString() + j.toString())
                 }
@@ -65,8 +65,6 @@ const Ship = (position) => {
     }
 
     function createBattleship(coordinate, orientation) {
-
-
         let possibleChoices = []
 
         if (coordinate == 100) {
@@ -264,7 +262,7 @@ const Ship = (position) => {
     return {
         getPosition,
         setPosition,
-        carrierChoices,
+        shipChoices,
         createCarrier,
         createBattleship,
         createDestroyer,

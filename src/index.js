@@ -3,6 +3,8 @@ import "./style.css"
 import { Game } from "./game.js";
 import { Ship } from "./objects.js";
 
+let gameStart = false
+
 Game
 
 function displayHeader() {
@@ -61,7 +63,9 @@ function displayPlayerOneBoard() {
                 }
             }
 
-            playerCellClick()
+            if (gameStart == true) {
+                playerCellClick()
+            }
 
             playerOneGameboard.appendChild(boardCell)
 
@@ -123,8 +127,10 @@ function displayPlayerTwoBoard() {
                     disableAllButtons()
                 }
 
-                Game.getComputerGameboard().recieveAttack(boardCell.textContent)
-                displayPlayerOneBoard()
+                if (gameStart == true) {
+                    Game.getComputerGameboard().recieveAttack(boardCell.textContent)
+                    displayPlayerOneBoard()
+                }
             
             }
 
@@ -134,12 +140,12 @@ function displayPlayerTwoBoard() {
     })
 }
 
-function displayPlaceShipsBoard() {
+function displayPlaceCarrierBoard() {
     const playerOneGameboard = document.querySelector('.player-one-gameboard');
     playerOneGameboard.textContent = [];
 
     let carrier = Ship([]);
-    let possibleChoices = carrier.carrierChoices(globalCoordinate);
+    let possibleChoices = carrier.shipChoices(globalCoordinate, 5);
 
     (Game.getPlayerGameboard().getBoard()).forEach((rowCell) => {
 
@@ -171,19 +177,66 @@ function displayPlaceShipsBoard() {
                     Game.getPlayerGameboard().placeShips(playerShips);
                     Game.getPlayerGameboard().placeEmptySpace();
                     displayPlayerOneBoard()
+                    displayPlaceBattleshipBoard()
                     return
                 })
             }
 
             if (possibleChoices.includes(boardCell.getAttribute('id'))) {
-
                 playerCarrierCell()
                 playerCarrierClick()
             }
-
-
             playerOneGameboard.appendChild(boardCell)
+        })
+    })
+}
 
+function displayPlaceBattleshipBoard(){
+    const playerOneGameboard = document.querySelector('.player-one-gameboard');
+    playerOneGameboard.textContent = [];
+
+    let battleship = Ship([]);
+    let possibleChoices = battleship.shipChoices(globalCoordinate, 4);
+
+    (Game.getPlayerGameboard().getBoard()).forEach((rowCell) => {
+
+        rowCell.forEach((columnCell) => {
+
+            const boardCell = document.createElement('div')
+            boardCell.textContent = columnCell
+            boardCell.setAttribute('id', columnCell)
+            boardCell.classList.add('player-one-cells-place')
+            boardCell.style.width = '10%'
+            boardCell.style.height = '10%'
+
+            function playerBattleshipCell() {
+
+                boardCell.addEventListener('mouseenter', () => {
+                    boardCell.style.backgroundColor = 'yellow'
+                })
+
+                boardCell.addEventListener('mouseleave', () => {
+                    boardCell.style.backgroundColor = ''
+                })
+
+            }
+
+            function playerBattleshipClick() {
+                boardCell.addEventListener('click', () => {
+                    battleship.createBattleship(boardCell.getAttribute('id'), globalCoordinate)
+                    playerShips.push(battleship)
+                    Game.getPlayerGameboard().placeShips(playerShips);
+                    Game.getPlayerGameboard().placeEmptySpace();
+                    displayPlayerOneBoard()
+                    return
+                })
+            }
+
+            if (possibleChoices.includes(boardCell.getAttribute('id'))) {
+                playerBattleshipCell()
+                playerBattleshipClick()
+            }
+            playerOneGameboard.appendChild(boardCell)
         })
     })
 }
@@ -200,7 +253,6 @@ function setRotateButton() {
         } else {
             globalCoordinate = 'X'
         }
-        displayPlaceShipsBoard()
     })
 }
 
@@ -301,7 +353,7 @@ function setComputerShips() {
 
 function gameController() {
     setRotateButton()
-    displayPlaceShipsBoard()
+    displayPlaceCarrierBoard()
 
 }
 
