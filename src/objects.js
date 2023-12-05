@@ -32,7 +32,7 @@ const Ship = (position) => {
 
         if (coordinate == 100) {
 
-            let possibleChoices = carrierChoices(orientation)
+            let possibleChoices = shipChoices(orientation, 5)
 
             coordinate = possibleChoices[Math.floor(Math.random() * possibleChoices.length)]
 

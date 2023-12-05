@@ -280,7 +280,6 @@ function displayPlaceBattleshipBoard(){
                     playerShips.push(battleship)
                     Game.getPlayerGameboard().placeShips(playerShips);
                     Game.getPlayerGameboard().placeEmptySpace();
-                    displayPlayerOneBoard()
                     displayPlaceDestroyerBoard()
                     return
                 })
@@ -364,7 +363,6 @@ function displayPlaceDestroyerBoard() {
                     playerShips.push(destroyer)
                     Game.getPlayerGameboard().placeShips(playerShips);
                     Game.getPlayerGameboard().placeEmptySpace();
-                    displayPlayerOneBoard()
                     displayPlaceSubmarineBoard()
                     return
                 })
@@ -448,7 +446,6 @@ function displayPlaceSubmarineBoard() {
                     playerShips.push(submarine)
                     Game.getPlayerGameboard().placeShips(playerShips);
                     Game.getPlayerGameboard().placeEmptySpace();
-                    displayPlayerOneBoard()
                     displayPlacePatrolBoard()
                     return
                 })
@@ -532,6 +529,7 @@ function displayPlacePatrolBoard() {
                     playerShips.push(patrol)
                     Game.getPlayerGameboard().placeShips(playerShips);
                     Game.getPlayerGameboard().placeEmptySpace();
+                    gameStart = true;
                     displayPlayerOneBoard()
                     return
                 })
@@ -547,20 +545,6 @@ function displayPlacePatrolBoard() {
 }
 
 let globalCoordinate = "X"
-
-function setRotateButton() {
-    
-    const rotateButton = document.getElementById('rotate')
-
-    rotateButton.addEventListener('click', () => {
-        if (globalCoordinate == 'X') {
-            globalCoordinate = 'Y'
-        } else {
-            globalCoordinate = 'X'
-        }
-    })
-}
-
 
 let playerShips = []
 
@@ -634,8 +618,9 @@ function setComputerShips() {
 }
 
 function gameController() {
+    setComputerShips()
+    displayPlayerTwoBoard()
     displayPlaceCarrierBoard()
-
 }
 
 gameController()
