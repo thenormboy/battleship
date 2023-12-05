@@ -228,6 +228,7 @@ function displayPlaceBattleshipBoard(){
                     Game.getPlayerGameboard().placeShips(playerShips);
                     Game.getPlayerGameboard().placeEmptySpace();
                     displayPlayerOneBoard()
+                    displayPlaceDestroyerBoard()
                     return
                 })
             }
@@ -235,6 +236,158 @@ function displayPlaceBattleshipBoard(){
             if (possibleChoices.includes(boardCell.getAttribute('id'))) {
                 playerBattleshipCell()
                 playerBattleshipClick()
+            }
+            playerOneGameboard.appendChild(boardCell)
+        })
+    })
+}
+
+function displayPlaceDestroyerBoard() {
+    const playerOneGameboard = document.querySelector('.player-one-gameboard');
+    playerOneGameboard.textContent = [];
+
+    let destroyer = Ship([]);
+    let possibleChoices = destroyer.shipChoices(globalCoordinate, 4);
+
+    (Game.getPlayerGameboard().getBoard()).forEach((rowCell) => {
+
+        rowCell.forEach((columnCell) => {
+
+            const boardCell = document.createElement('div')
+            boardCell.textContent = columnCell
+            boardCell.setAttribute('id', columnCell)
+            boardCell.classList.add('player-one-cells-place')
+            boardCell.style.width = '10%'
+            boardCell.style.height = '10%'
+
+            function playerDestroyerCell() {
+
+                boardCell.addEventListener('mouseenter', () => {
+                    boardCell.style.backgroundColor = 'yellow'
+                })
+
+                boardCell.addEventListener('mouseleave', () => {
+                    boardCell.style.backgroundColor = ''
+                })
+
+            }
+
+            function playerDestroyerClick() {
+                boardCell.addEventListener('click', () => {
+                    destroyer.createDestroyer(boardCell.getAttribute('id'), globalCoordinate)
+                    playerShips.push(destroyer)
+                    Game.getPlayerGameboard().placeShips(playerShips);
+                    Game.getPlayerGameboard().placeEmptySpace();
+                    displayPlayerOneBoard()
+                    displayPlaceSubmarineBoard()
+                    return
+                })
+            }
+
+            if (possibleChoices.includes(boardCell.getAttribute('id'))) {
+                playerDestroyerCell()
+                playerDestroyerClick()
+            }
+            playerOneGameboard.appendChild(boardCell)
+        })
+    })
+}
+
+function displayPlaceSubmarineBoard() {
+    const playerOneGameboard = document.querySelector('.player-one-gameboard');
+    playerOneGameboard.textContent = [];
+
+    let submarine = Ship([]);
+    let possibleChoices = submarine.shipChoices(globalCoordinate, 3);
+
+    (Game.getPlayerGameboard().getBoard()).forEach((rowCell) => {
+
+        rowCell.forEach((columnCell) => {
+
+            const boardCell = document.createElement('div')
+            boardCell.textContent = columnCell
+            boardCell.setAttribute('id', columnCell)
+            boardCell.classList.add('player-one-cells-place')
+            boardCell.style.width = '10%'
+            boardCell.style.height = '10%'
+
+            function playerSubmarineCell() {
+
+                boardCell.addEventListener('mouseenter', () => {
+                    boardCell.style.backgroundColor = 'yellow'
+                })
+
+                boardCell.addEventListener('mouseleave', () => {
+                    boardCell.style.backgroundColor = ''
+                })
+
+            }
+
+            function playerSubmarineClick() {
+                boardCell.addEventListener('click', () => {
+                    submarine.createSubmarine(boardCell.getAttribute('id'), globalCoordinate)
+                    playerShips.push(submarine)
+                    Game.getPlayerGameboard().placeShips(playerShips);
+                    Game.getPlayerGameboard().placeEmptySpace();
+                    displayPlayerOneBoard()
+                    displayPlacePatrolBoard()
+                    return
+                })
+            }
+
+            if (possibleChoices.includes(boardCell.getAttribute('id'))) {
+                playerSubmarineCell()
+                playerSubmarineClick()
+            }
+            playerOneGameboard.appendChild(boardCell)
+        })
+    })
+}
+
+function displayPlacePatrolBoard() {
+    const playerOneGameboard = document.querySelector('.player-one-gameboard');
+    playerOneGameboard.textContent = [];
+
+    let patrol = Ship([]);
+    let possibleChoices = patrol.shipChoices(globalCoordinate, 2);
+
+    (Game.getPlayerGameboard().getBoard()).forEach((rowCell) => {
+
+        rowCell.forEach((columnCell) => {
+
+            const boardCell = document.createElement('div')
+            boardCell.textContent = columnCell
+            boardCell.setAttribute('id', columnCell)
+            boardCell.classList.add('player-one-cells-place')
+            boardCell.style.width = '10%'
+            boardCell.style.height = '10%'
+
+            function playerPatrolCell() {
+
+                boardCell.addEventListener('mouseenter', () => {
+                    boardCell.style.backgroundColor = 'yellow'
+                })
+
+                boardCell.addEventListener('mouseleave', () => {
+                    boardCell.style.backgroundColor = ''
+                })
+
+            }
+
+            function playerPatrolClick() {
+                boardCell.addEventListener('click', () => {
+                    patrol.createPatrol(boardCell.getAttribute('id'), globalCoordinate)
+                    playerShips.push(patrol)
+                    Game.getPlayerGameboard().placeShips(playerShips);
+                    Game.getPlayerGameboard().placeEmptySpace();
+                    displayPlayerOneBoard()
+                    return
+                })
+            }
+
+            if (possibleChoices.includes(boardCell.getAttribute('id'))) {
+                playerPatrolCell()
+                playerPatrolClick()
             }
             playerOneGameboard.appendChild(boardCell)
         })
