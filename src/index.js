@@ -147,6 +147,27 @@ function displayPlaceCarrierBoard() {
     let carrier = Ship([]);
     let possibleChoices = carrier.shipChoices(globalCoordinate, 5);
 
+    function createRotateBtn() {
+        const rotateContainer = document.querySelector('.rotate-container')
+        rotateContainer.textContent = '';
+        const rotateBtn = document.createElement('button')
+        rotateBtn.textContent = 'Rotate'
+
+        rotateBtn.addEventListener('click', () => {
+            if (globalCoordinate == 'X') {
+                globalCoordinate = 'Y'
+            } else {
+                globalCoordinate = 'X'
+            }
+
+            displayPlaceCarrierBoard()
+        })
+
+        rotateContainer.appendChild(rotateBtn)
+    };
+
+    createRotateBtn();
+
     (Game.getPlayerGameboard().getBoard()).forEach((rowCell) => {
 
         rowCell.forEach((columnCell) => {
@@ -204,6 +225,27 @@ function displayPlaceBattleshipBoard(){
             possibleChoices.push(value)
         }
     });
+
+    function createRotateBtn() {
+        const rotateContainer = document.querySelector('.rotate-container')
+        rotateContainer.textContent = '';
+        const rotateBtn = document.createElement('button')
+        rotateBtn.textContent = 'Rotate'
+
+        rotateBtn.addEventListener('click', () => {
+            if (globalCoordinate == 'X') {
+                globalCoordinate = 'Y'
+            } else {
+                globalCoordinate = 'X'
+            }
+
+            displayPlaceBattleshipBoard()
+        })
+
+        rotateContainer.appendChild(rotateBtn)
+    };
+
+    createRotateBtn();
 
     (Game.getPlayerGameboard().getBoard()).forEach((rowCell) => {
 
@@ -268,6 +310,27 @@ function displayPlaceDestroyerBoard() {
         }
     });
 
+    function createRotateBtn() {
+        const rotateContainer = document.querySelector('.rotate-container')
+        rotateContainer.textContent = '';
+        const rotateBtn = document.createElement('button')
+        rotateBtn.textContent = 'Rotate'
+
+        rotateBtn.addEventListener('click', () => {
+            if (globalCoordinate == 'X') {
+                globalCoordinate = 'Y'
+            } else {
+                globalCoordinate = 'X'
+            }
+
+            displayPlaceDestroyerBoard()
+        })
+
+        rotateContainer.appendChild(rotateBtn)
+    };
+
+    createRotateBtn();
+
     (Game.getPlayerGameboard().getBoard()).forEach((rowCell) => {
 
         rowCell.forEach((columnCell) => {
@@ -331,6 +394,27 @@ function displayPlaceSubmarineBoard() {
         }
     });
 
+    function createRotateBtn() {
+        const rotateContainer = document.querySelector('.rotate-container')
+        rotateContainer.textContent = '';
+        const rotateBtn = document.createElement('button')
+        rotateBtn.textContent = 'Rotate'
+
+        rotateBtn.addEventListener('click', () => {
+            if (globalCoordinate == 'X') {
+                globalCoordinate = 'Y'
+            } else {
+                globalCoordinate = 'X'
+            }
+
+            displayPlaceSubmarineBoard()
+        })
+
+        rotateContainer.appendChild(rotateBtn)
+    };
+
+    createRotateBtn();
+
     (Game.getPlayerGameboard().getBoard()).forEach((rowCell) => {
 
         rowCell.forEach((columnCell) => {
@@ -393,6 +477,27 @@ function displayPlacePatrolBoard() {
             possibleChoices.push(value)
         }
     });
+
+    function createRotateBtn() {
+        const rotateContainer = document.querySelector('.rotate-container')
+        rotateContainer.textContent = '';
+        const rotateBtn = document.createElement('button')
+        rotateBtn.textContent = 'Rotate'
+
+        rotateBtn.addEventListener('click', () => {
+            if (globalCoordinate == 'X') {
+                globalCoordinate = 'Y'
+            } else {
+                globalCoordinate = 'X'
+            }
+
+            displayPlacePatrolBoard()
+        })
+
+        rotateContainer.appendChild(rotateBtn)
+    };
+
+    createRotateBtn();
 
     (Game.getPlayerGameboard().getBoard()).forEach((rowCell) => {
 
@@ -458,29 +563,6 @@ function setRotateButton() {
 
 
 let playerShips = []
-
-function setPlayerShips() {
-    let carrier = Ship([])
-    let battleship = Ship([])
-    let destroyer = Ship([])
-    let submarine = Ship([])
-    let patrol = Ship([])
-
-    carrier.createCarrier('01', 'Y')
-    battleship.createBattleship('13', 'X')
-    destroyer.createDestroyer('71', 'X')
-    submarine.createSubmarine('76', 'Y')
-    patrol.createPatrol('53', 'X')
-
-    playerShips.push(carrier)
-    playerShips.push(battleship)
-    playerShips.push(destroyer)
-    playerShips.push(submarine)
-    playerShips.push(patrol)
-
-    //Game.getPlayerGameboard().placeShips(playerShips);
-    //Game.getPlayerGameboard().placeEmptySpace();
-}
 
 let computerShips = []
 
@@ -552,7 +634,6 @@ function setComputerShips() {
 }
 
 function gameController() {
-    setRotateButton()
     displayPlaceCarrierBoard()
 
 }
