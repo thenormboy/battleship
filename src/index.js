@@ -196,7 +196,15 @@ function displayPlaceBattleshipBoard(){
     playerOneGameboard.textContent = [];
 
     let battleship = Ship([]);
-    let possibleChoices = battleship.shipChoices(globalCoordinate, 4);
+    let openSpace = battleship.shipChoices(globalCoordinate, 4);
+    let occupiedSpace = Game.getPlayerGameboard().getOccupiedCells();
+    let possibleChoices = [];
+
+    openSpace.forEach(value => {
+        if (!(occupiedSpace.includes(value))) {
+            possibleChoices.push(value)
+        }
+    });
 
     (Game.getPlayerGameboard().getBoard()).forEach((rowCell) => {
 
@@ -247,7 +255,15 @@ function displayPlaceDestroyerBoard() {
     playerOneGameboard.textContent = [];
 
     let destroyer = Ship([]);
-    let possibleChoices = destroyer.shipChoices(globalCoordinate, 4);
+    let openSpace = destroyer.shipChoices(globalCoordinate, 4);
+    let occupiedSpace = Game.getPlayerGameboard().getOccupiedCells();
+    let possibleChoices = [];
+
+    openSpace.forEach(value => {
+        if (!(occupiedSpace.includes(value))) {
+            possibleChoices.push(value)
+        }
+    });
 
     (Game.getPlayerGameboard().getBoard()).forEach((rowCell) => {
 
@@ -298,7 +314,15 @@ function displayPlaceSubmarineBoard() {
     playerOneGameboard.textContent = [];
 
     let submarine = Ship([]);
-    let possibleChoices = submarine.shipChoices(globalCoordinate, 3);
+    let openSpace = submarine.shipChoices(globalCoordinate, 3);
+    let occupiedSpace = Game.getPlayerGameboard().getOccupiedCells();
+    let possibleChoices = [];
+
+    openSpace.forEach(value => {
+        if (!(occupiedSpace.includes(value))) {
+            possibleChoices.push(value)
+        }
+    });
 
     (Game.getPlayerGameboard().getBoard()).forEach((rowCell) => {
 
@@ -349,7 +373,15 @@ function displayPlacePatrolBoard() {
     playerOneGameboard.textContent = [];
 
     let patrol = Ship([]);
-    let possibleChoices = patrol.shipChoices(globalCoordinate, 2);
+    let openSpace = patrol.shipChoices(globalCoordinate, 2);
+    let occupiedSpace = Game.getPlayerGameboard().getOccupiedCells();
+    let possibleChoices = [];
+
+    openSpace.forEach(value => {
+        if (!(occupiedSpace.includes(value))) {
+            possibleChoices.push(value)
+        }
+    });
 
     (Game.getPlayerGameboard().getBoard()).forEach((rowCell) => {
 
