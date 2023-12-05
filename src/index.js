@@ -176,7 +176,6 @@ function displayPlaceCarrierBoard() {
                     playerShips.push(carrier)
                     Game.getPlayerGameboard().placeShips(playerShips);
                     Game.getPlayerGameboard().placeEmptySpace();
-                    displayPlayerOneBoard()
                     displayPlaceBattleshipBoard()
                     return
                 })
@@ -216,6 +215,10 @@ function displayPlaceBattleshipBoard(){
             boardCell.classList.add('player-one-cells-place')
             boardCell.style.width = '10%'
             boardCell.style.height = '10%'
+
+            if (Game.getPlayerGameboard().getOccupiedCells().includes(boardCell.textContent)) {
+                boardCell.classList.add('occupied-cell')
+            } 
 
             function playerBattleshipCell() {
 
@@ -276,6 +279,10 @@ function displayPlaceDestroyerBoard() {
             boardCell.style.width = '10%'
             boardCell.style.height = '10%'
 
+            if (Game.getPlayerGameboard().getOccupiedCells().includes(boardCell.textContent)) {
+                boardCell.classList.add('occupied-cell')
+            } 
+
             function playerDestroyerCell() {
 
                 boardCell.addEventListener('mouseenter', () => {
@@ -335,6 +342,10 @@ function displayPlaceSubmarineBoard() {
             boardCell.style.width = '10%'
             boardCell.style.height = '10%'
 
+            if (Game.getPlayerGameboard().getOccupiedCells().includes(boardCell.textContent)) {
+                boardCell.classList.add('occupied-cell')
+            } 
+
             function playerSubmarineCell() {
 
                 boardCell.addEventListener('mouseenter', () => {
@@ -393,6 +404,10 @@ function displayPlacePatrolBoard() {
             boardCell.classList.add('player-one-cells-place')
             boardCell.style.width = '10%'
             boardCell.style.height = '10%'
+
+            if (Game.getPlayerGameboard().getOccupiedCells().includes(boardCell.textContent)) {
+                boardCell.classList.add('occupied-cell')
+            } 
 
             function playerPatrolCell() {
 
