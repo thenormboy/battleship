@@ -4,6 +4,7 @@ import { Game } from "./game.js";
 import { Ship } from "./objects.js";
 
 let gameStart = false
+let gameEnd = false
 
 Game
 
@@ -59,11 +60,17 @@ function displayPlayerOneBoard() {
                     }
 
                     Game.getPlayerGameboard().recieveAttack(attackCoordinate)
+
+                    if (Game.getPlayerGameboard().checkGameOver()) {
+                        console.log('computer wins')
+                        gameEnd = true
+                    }
+
                     displayPlayerTwoBoard()
                 }
             }
 
-            if (gameStart == true) {
+            if (gameStart == true && gameEnd == false) {
                 playerCellClick()
             }
 
@@ -129,12 +136,18 @@ function displayPlayerTwoBoard() {
 
                 if (gameStart == true) {
                     Game.getComputerGameboard().recieveAttack(boardCell.textContent)
+                    if (Game.getComputerGameboard().checkGameOver()) {
+                        gameEnd = true
+                        console.log('player wins')
+                    }
                     displayPlayerOneBoard()
                 }
             
             }
 
-            boardCell.addEventListener('click', computerCellClick)
+            if (gameEnd == false) {
+                boardCell.addEventListener('click', computerCellClick)
+            }
             playerTwoGameboard.appendChild(boardCell)
         })
     })
